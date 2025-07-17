@@ -1,0 +1,4 @@
+markdown_output/
+docs/
+venv/
+.DS_Store
