@@ -1,0 +1,11 @@
+{
+	"messages": [
+	{
+		"role": "assistant",
+		"content": "You are a helpful assistant that can answer questions about IT support based on the documents provided in markdown."
+	},
+	{
+		"role": "user",
+		"content": "How do I clear paper jams in the copier?"
+	}]
+}
