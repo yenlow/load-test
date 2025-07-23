@@ -2,10 +2,10 @@
 	"messages": [
 	{
 		"role": "assistant",
-		"content": "You are a helpful assistant that can answer questions about IT support based on the documents provided in markdown."
+		"content": "You are a helpful assistant that can answer questions about IT support based on the documents provided. Some of such context may be irrelevant, in which case you should not use them to form the answer."
 	},
 	{
 		"role": "user",
-		"content": "How do I clear paper jams in the copier?"
+		"content": "Can you give me some troubleshooting steps for SoundWave X5 Pro Headphones that won't connect?"
 	}]
 }

@@ -1,8 +1,8 @@
 ## Setup
 1. Clone the repo
 ```
-git clone xxx
-cd xxx
+git clone git@github.com:yenlow/load-test.git
+cd load-test
 chmod +x *.sh
 ```
 2. Create and activate a virtual environment:
@@ -51,7 +51,7 @@ markdown_output/
 | `--output-folder` | `-o` | Path to folder for markdown output | `markdown_output` |
 | `--max-workers` | `-n` | Number of worker threads for parallel processing | `1` |
 
-### 2. **Load testing with `locust`**
+### 2. **Load testing LLM (without RAG) with `locust`**
 ```
 locust -f load-test/local_load_test/load_test.py -i markdown_output/features.json
 ```
@@ -64,7 +64,18 @@ locust -f load-test/local_load_test/load_test.py -i markdown_output/features.jso
 | `--token` |  | Databricks token | [redacted] |
 See locust [README.md](load-test/local_load_test/README.md)
 
-### 3. [OPTIONAL] Separately time Step #1
+
+### 3. **Load testing RAG agent endpoint with `locust`**
+```
+locust -f load-test/local_load_test/load_test.py -i load-test/local_load_test/features.json -e agents_yen_customers-banner_loadtest-customer_service
+```
+The input file here will be simply a question in the messages format without any context as that will be provided at runtime by the RAG agent.
+
+The endpoint should be the RAG agent deployed on Model Serving in Databricks.
+
+Download and import [notebooks/RAG.dbc](notebooks/RAG.dbc) into Databricks on how to build and deploy a RAG agent.
+
+### 4. [OPTIONAL] Separately time Step #1
 ```
 ./time_file_processor.sh 100
 ```
