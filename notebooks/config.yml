@@ -1,0 +1,10 @@
+# Please change catalog and schema as needed
+catalog: yen_customers
+schema: banner_loadtest
+llm_endpoint: databricks-claude-3-7-sonnet
+retriever:
+  tool_name: search_product_docs
+  # Please change to match your VS endpoint and index
+  vs_endpoint: product_doc_endpoint
+  vs_index: yen_training.agents.product_docs_vs
+  k: 5

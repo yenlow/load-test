@@ -66,14 +66,14 @@ See locust [README.md](load-test/local_load_test/README.md)
 
 
 ### 3. **Load testing RAG agent endpoint with `locust`**
+This requires a RAG agent already served on a Databricks endpoint. To serve the agent, download and import [notebooks](notebooks) into Databricks to first build and deploy a RAG agent.
+
 ```
 locust -f load-test/local_load_test/load_test.py -i load-test/local_load_test/features.json -e agents_yen_customers-banner_loadtest-customer_service
 ```
 The input file here will be simply a question in the messages format without any context as that will be provided at runtime by the RAG agent.
 
 The endpoint should be the RAG agent deployed on Model Serving in Databricks.
-
-Download and import [notebooks/RAG.dbc](notebooks/RAG.dbc) into Databricks on how to build and deploy a RAG agent.
 
 ### 4. [OPTIONAL] Separately time Step #1
 ```
