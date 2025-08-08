@@ -80,7 +80,7 @@ import sys
 import statistics
 
 # Read timing data
-with open('$TIMING_FILE', 'r') as f:
+with open('$TIMING_FILE', 'r', encoding="utf-8") as f:
     times = [float(line.strip()) for line in f if line.strip()]
 
 if times:

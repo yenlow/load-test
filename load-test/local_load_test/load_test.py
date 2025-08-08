@@ -25,7 +25,7 @@ class LoadTestUser(HttpUser):
         token = self.environment.parsed_options.token
         endpoint_name = self.environment.parsed_options.endpoint_name
 
-        with open(infile, "r") as json_features:
+        with open(infile, "r", encoding="utf-8") as json_features:
             model_input = json.load(json_features)
 
         headers = {"Authorization": f"Bearer {token}"}

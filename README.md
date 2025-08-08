@@ -1,3 +1,5 @@
+This uses [`locust`](https://locust.io/) which fires up a flask web app which isn't supported on Databricks Workspace. Please run it on your local laptop or cloud instance that can access the Databricks endpoint you are load testing.
+
 ## Setup
 1. Clone the repo
 ```
@@ -69,7 +71,7 @@ See locust [README.md](load-test/local_load_test/README.md)
 This requires a RAG agent already served on a Databricks endpoint. To serve the agent, download and import [notebooks](notebooks) into Databricks to first build and deploy a RAG agent.
 
 ```
-locust -f load-test/local_load_test/load_test.py -i load-test/local_load_test/features.json -e agents_yen_customers-banner_loadtest-customer_service
+locust -f load-test/local_load_test/load_test.py -i query.json -e agents_yen_customers-banner_loadtest-customer_service
 ```
 The input file here will be simply a question in the messages format without any context as that will be provided at runtime by the RAG agent.
 
@@ -82,3 +84,34 @@ The endpoint should be the RAG agent deployed on Model Serving in Databricks.
 It will call Step #1 `python file_processor.py` 100 times and time it with full statistics. Edit CMD in line 23 as needed.
 
 The times will depend on where you deploy the parsing code and whether it supports multi-threaded processing. This step is unlikely to be the bottleneck and should not affect load tests.
+
+
+## Troubleshooting
+**Error 400:** Check that your input to the endpoint follows a messages format
+```
+{
+  "messages": [
+    {
+      "role": "user",
+      "content": "How do I clear paper jams in the copier?"
+    }
+  ]
+}
+```
+
+
+**Error 200:** Authentication issues
+Check that you can access the endpoint you are load testing
+```
+curl \
+  -u token:yourtoken \
+  -X POST \
+  -H "Content-Type: application/json" \
+  -d '{"messages": [
+    {
+      "role": "user",
+      "content": "How do I clear paper jams in the copier?"
+    }
+  ]}' \
+  https://your_databricks_host/serving-endpoints/your_endpoint_name/invocations 
+```
